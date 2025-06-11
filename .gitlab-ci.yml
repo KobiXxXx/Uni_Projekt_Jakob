@@ -1,0 +1,41 @@
+stages:
+  - lint
+  - build
+
+lint:
+  stage: lint
+  image: python:3.9
+  script:
+    - pip install flake8
+    - flake8 .
+  allow_failure: true
+  only:
+    - branches
+
+build:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:v1.23.2-debug
+    entrypoint: [""]
+  variables:
+    DOCKER_CONFIG: /kaniko/.docker/
+  script:
+    # Debugging: Zeige den Inhalt des Verzeichnisses an
+    - echo "Verzeichnisinhalt vor dem Build:"
+    - ls -R
+    # Baue das db_rest_service Image
+    - /kaniko/executor --context ./ --dockerfile ./db_rest_service/Dockerfile --destination $CI_REGISTRY_IMAGE/db_rest_service:latest
+    # Baue das test_runner Image
+    - /kaniko/executor --context ./ --dockerfile ./test_runner/Dockerfile --destination $CI_REGISTRY_IMAGE/test_runner:latest
+    # Baue das controller Image
+    - /kaniko/executor --context ./ --dockerfile ./controller/Dockerfile --destination $CI_REGISTRY_IMAGE/controller:latest
+    # Baue das worker Image
+    - /kaniko/executor --context ./ --dockerfile ./worker/Dockerfile --destination $CI_REGISTRY_IMAGE/worker:latest
+    # Findet alle anderen Dockerfiles und baut Images mit kaniko
+    - for dockerfile in $(find . -name 'Dockerfile' ! -path './test_runner/Dockerfile' ! -path './db_rest_service/Dockerfile' ! -path './controller/Dockerfile' ! -path './worker/Dockerfile'); do
+        context_dir=$(dirname $dockerfile);
+        image_name=$(basename $context_dir);
+        /kaniko/executor --context $context_dir --dockerfile $dockerfile --destination $CI_REGISTRY_IMAGE/$image_name:latest;
+      done
+  only:
+    - branches

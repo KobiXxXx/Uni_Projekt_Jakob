@@ -1,0 +1,3 @@
+Performance Test: 10 Tests with 10x10 Matrix
+Number of Values: 10
+Duration: [8.084, 7.055, 8.082, 8.071, 8.074, 8.065, 8.076, 7.075, 8.105, 8.078]

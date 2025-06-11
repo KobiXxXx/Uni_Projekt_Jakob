@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/matrix.css">
+    <script src="scripts/matrix.js"></script>
+    <title>Distributed Systems - Lab</title>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Distributed Systems - Lab</div>
+    </header>
+    <section class="section">
+        <div class="matrix-container">
+            <div class="matrix" id="matrixA">
+                <h2>Matrix A</h2>
+                <div class="input-group">
+                    <label for="rowsA">Anzahl Zeilen:</label>
+                    <input type="number" id="rowsA" name="rowsA" min="2" max="100" value="2">
+                    <label for="colsA">Anzahl Spalten:</label>
+                    <input type="number" id="colsA" name="colsA" min="2" max="100" value="2">
+                </div>
+                <div id="matrixA-content"></div>
+            </div>
+            <div class="matrix" id="matrixB">
+                <h2>Matrix B</h2>
+                <div class="input-group">
+                    <label for="rowsB">Anzahl Zeilen:</label>
+                    <input type="number" id="rowsB" name="rowsB" min="2" max="100" value="2">
+                    <label for="colsB">Anzahl Spalten:</label>
+                    <input type="number" id="colsB" name="colsB" min="2" max="100" value="2">
+                </div>
+                <div id="matrixB-content"></div>
+            </div>
+        </div>
+        <button class="generate-button" onclick="generateMatrices()">Generate</button>
+        <button class="calculate-button" id="calculate-button" onclick="sendMatricesToServer()" disabled>Calculate</button>
+        <div id="calculating" class="calculating-text">Calculating...</div>
+    </section>
+    <section id="result-section" class="section">
+        <div id="resultMatrix-div" class="matrix-container"></div>
+        <div id="calculation-time"></div>
+    </section>
+</body>
+</html>

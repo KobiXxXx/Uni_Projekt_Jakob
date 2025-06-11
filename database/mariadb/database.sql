@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS matrix (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    matrix_id INT NOT NULL,
+    i INT NOT NULL,
+    j INT NOT NULL,
+    result INT NOT NULL
+);

@@ -1,0 +1,3 @@
+Performance Test: 10 Tests with 2x2 Matrix
+Number of Values: 10
+Duration: [3.118, 2.097, 2.092, 2.109, 1.064, 2.101, 2.089, 2.11, 2.109, 2.121]

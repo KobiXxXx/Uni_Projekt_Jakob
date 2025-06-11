@@ -1,0 +1,3 @@
+Performance Test: 1 Tests with 100x100 Matrix
+Number of Values: 1
+Duration: [147.803]

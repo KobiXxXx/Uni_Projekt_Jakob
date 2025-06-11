@@ -1,0 +1,3 @@
+Performance Test: 10 Tests with 5x5 Matrix
+Number of Values: 10
+Duration: [2.054, 3.067, 3.085, 3.086, 2.057, 2.077, 3.07, 2.055, 3.084, 2.057]
